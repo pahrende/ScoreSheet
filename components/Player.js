@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Button,
     View,
     Text,
     StyleSheet
@@ -23,10 +24,10 @@ export default class Player extends React.Component{
             <View style={styles.tableContainer}>
                 <View style={styles.tableRow}>
                     <View style={styles.tableCell}><Text>{playerInfo.name}</Text></View>
-                    <Button><Text>+</Text></Button>
                     <View style={styles.tableCell}><Text>{playerInfo.color}</Text></View>
-                    <Button><Text>-</Text></Button>
+                    <Button title='-' />
                     <View style={styles.tableCell}><Text>{playerInfo.score}</Text></View>
+                    <Button title='+' />
                 </View>
             </View>
         );
