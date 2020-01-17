@@ -12,8 +12,7 @@ export default class Player extends React.Component{
         playerInfo: {
             name: "Player",
             color: "blue",
-            score: 0,
-            scoreHistory: []
+            score: 0
         }
     }
 
