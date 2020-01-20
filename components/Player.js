@@ -1,18 +1,24 @@
 import React from 'react';
 import {
+    Button,
     View,
     Text,
     StyleSheet
 } from 'react-native';
 
 export default class Player extends React.Component{
+    constructor(props){
+        super(props);
+        this.state.playerInfo.name = props.name;
+        this.state.playerInfo.color = props.color;
+        this.state.playerInfo.score = props.score;
+    }
 
     state = {
         playerInfo: {
             name: "Player",
             color: "blue",
-            score: 0,
-            scoreHistory: []
+            score: 0
         }
     }
 
@@ -22,11 +28,12 @@ export default class Player extends React.Component{
         return(
             <View style={styles.tableContainer}>
                 <View style={styles.tableRow}>
+                    <Button title="X"/>
                     <View style={styles.tableCell}><Text>{playerInfo.name}</Text></View>
-                    <Button><Text>+</Text></Button>
                     <View style={styles.tableCell}><Text>{playerInfo.color}</Text></View>
-                    <Button><Text>-</Text></Button>
+                    <Button title="-"/>
                     <View style={styles.tableCell}><Text>{playerInfo.score}</Text></View>
+                    <Button title="+" />
                 </View>
             </View>
         );

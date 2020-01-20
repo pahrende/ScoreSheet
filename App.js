@@ -13,7 +13,7 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Player from "./components/Player"
+import Game from "./components/Game"
 
 const App: () => React$Node = () => {
   return (
@@ -30,7 +30,7 @@ const App: () => React$Node = () => {
             </View>
           )}
           <View style={styles.body}>
-            <Player />
+            <Game />
           </View>
         </ScrollView>
       </SafeAreaView>
