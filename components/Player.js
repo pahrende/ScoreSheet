@@ -28,12 +28,12 @@ export default class Player extends React.Component{
         return(
             <View style={styles.tableContainer}>
                 <View style={styles.tableRow}>
-                    <Button title="X"/>
-                    <View style={styles.tableCell}><Text>{playerInfo.name}</Text></View>
-                    <View style={styles.tableCell}><Text>{playerInfo.color}</Text></View>
-                    <Button title="-"/>
-                    <View style={styles.tableCell}><Text>{playerInfo.score}</Text></View>
-                    <Button title="+" />
+                    <Button title="X" onPress={this.props.onDeletePlayer}/>
+                    <View style={styles.tableCell}><Text>{this.props.name}</Text></View>
+                    <View style={styles.tableCell}><Text>{this.props.color}</Text></View>
+                    <Button title="-" onPress={this.props.onSubScore}/>
+                    <View style={styles.tableCell}><Text>{this.props.score}</Text></View>
+                    <Button title="+" onPress={this.props.onAddScore} />
                 </View>
             </View>
         );

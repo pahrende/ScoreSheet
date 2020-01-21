@@ -25,15 +25,45 @@ export default class Game extends React.Component{
 
         activePlayers.push(player);
 
-        this.setState(
-            {
-                activePlayers: activePlayers
-            }
-        );
+        this.setState({
+            activePlayers: activePlayers
+        });
+    }
+
+    onAddScore(i){
+        console.log("lets add some score to " + i);
+        const activePlayers = this.state.activePlayers;
+        activePlayers[i].score++;
+        console.log(activePlayers[i].score);
+        this.setState({
+            activePlayers: activePlayers
+        });
+    }
+
+    onSubScore(i){
+        console.log("lets add some score to " + i);
+        const activePlayers = this.state.activePlayers;
+        activePlayers[i].score--;
+        console.log(activePlayers[i].score);
+        this.setState({
+            activePlayers: activePlayers
+        });
+    }
+
+    onDeletePlayer(i){
+        console.log("lets delete someone! (" + i + ")");
+        
+        const activePlayers = Array.from(this.state.activePlayers);
+        activePlayers.splice(i,1);
+        console.log(activePlayers[i]);
+        this.setState({
+            activePlayers: activePlayers
+        });
     }
 
     render(){
         const activePlayers = this.state.activePlayers;
+        console.log(activePlayers);
         return (
             <View>
                 <View>
@@ -44,6 +74,9 @@ export default class Game extends React.Component{
                                 name={entry.name} 
                                 color={entry.color} 
                                 score={entry.score}
+                                onAddScore={() => {this.onAddScore(i)}}
+                                onSubScore={() => {this.onSubScore(i)}}
+                                onDeletePlayer={() => {this.onDeletePlayer(i)}}
                             />
                         );
                     })}
