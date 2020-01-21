@@ -6,7 +6,7 @@ import {
     StyleSheet
 } from 'react-native';
 
-import Player from './Player'
+import {Player} from './Player'
 
 export default class Game extends React.Component{
 
@@ -17,6 +17,7 @@ export default class Game extends React.Component{
 
     addNewPlayer(){
         const activePlayers = this.state.activePlayers;
+        const history = this.state.history;
         console.log("adding new player...");
         let player = {};
         player.name = "New Name";
@@ -24,40 +25,66 @@ export default class Game extends React.Component{
         player.score = 0;
 
         activePlayers.push(player);
+        history.push(activePlayers);
 
         this.setState({
-            activePlayers: activePlayers
+            activePlayers: activePlayers,
+            history: history
         });
     }
 
     onAddScore(i){
-        console.log("lets add some score to " + i);
+        //console.log("lets add some score to " + i);
         const activePlayers = this.state.activePlayers;
+        const history = this.state.history;
         activePlayers[i].score++;
-        console.log(activePlayers[i].score);
+        //console.log(activePlayers[i].score);
+        history.push(activePlayers);
+
         this.setState({
-            activePlayers: activePlayers
+            activePlayers: activePlayers,
+            history: history
         });
     }
 
     onSubScore(i){
-        console.log("lets add some score to " + i);
+        //console.log("lets sub some score to " + i);
         const activePlayers = this.state.activePlayers;
+        const history = this.state.history;
         activePlayers[i].score--;
-        console.log(activePlayers[i].score);
+        //console.log(activePlayers[i].score);
+        history.push(activePlayers);
+
         this.setState({
-            activePlayers: activePlayers
+            activePlayers: activePlayers,
+            history: history
         });
     }
 
     onDeletePlayer(i){
-        console.log("lets delete someone! (" + i + ")");
-        
+        //console.log("lets delete someone! (" + i + ")");
         const activePlayers = Array.from(this.state.activePlayers);
+        const history = this.state.history;
         activePlayers.splice(i,1);
-        console.log(activePlayers[i]);
+        //console.log(activePlayers[i]);
+        history.push(activePlayers);
+
         this.setState({
-            activePlayers: activePlayers
+            activePlayers: activePlayers,
+            history: history
+        });
+    }
+
+    onChangeColor(i){        
+        const activePlayers = this.state.activePlayers;
+        const history = this.state.history;
+
+        activePlayers[i].color = "red";
+        history.push(activePlayers);
+
+        this.setState({
+            activePlayers: activePlayers,
+            history: history
         });
     }
 
@@ -74,9 +101,10 @@ export default class Game extends React.Component{
                                 name={entry.name} 
                                 color={entry.color} 
                                 score={entry.score}
-                                onAddScore={() => {this.onAddScore(i)}}
-                                onSubScore={() => {this.onSubScore(i)}}
-                                onDeletePlayer={() => {this.onDeletePlayer(i)}}
+                                onAddScore={() => this.onAddScore(i)}
+                                onSubScore={() => this.onSubScore(i)}
+                                onDeletePlayer={() => this.onDeletePlayer(i)}
+                                onChangeColor={() => this.onChangeColor(i)}
                             />
                         );
                     })}

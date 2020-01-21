@@ -13,21 +13,21 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Player from "./components/Player"
+import Game from "./components/Game"
 
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar hidden={true}/>
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
           <View>
-            <Text>Welcome to ScoreSheet!</Text>
+            <Text style={styles.sectionTitle}>Welcome to ScoreSheet!</Text>
           </View>
           <View style={styles.body}>
-            <Player />
+            <Game />
           </View>
         </ScrollView>
       </SafeAreaView>
