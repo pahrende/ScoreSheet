@@ -20,16 +20,16 @@ const App: () => React$Node = () => {
     <>
       <StatusBar hidden={true}/>
       <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
           <View>
             <Text style={styles.sectionTitle}>Welcome to ScoreSheet!</Text>
           </View>
+          <ScrollView
+              contentInsetAdjustmentBehavior="automatic"
+              style={styles.scrollView}>
           <View style={styles.body}>
             <Game />
           </View>
-        </ScrollView>
+          </ScrollView>
       </SafeAreaView>
     </>
   );
@@ -71,6 +71,9 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingRight: 12,
     textAlign: 'right',
+  },
+  scrollView: {
+      backgroundColor: Colors.lighter,
   },
 });
 

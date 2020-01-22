@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     Button,
+    TouchableOpacity,
     View,
     Text,
     StyleSheet
@@ -10,12 +11,12 @@ export function Player(props){
     return(
         <View style={styles.tableContainer}>
             <View style={styles.tableRow}>
-                <Button title="X" onPress={props.onDeletePlayer}/>
-                <View style={styles.tableCell}><Text>{props.name}</Text></View>
-                <View style={styles.tableCell}><Text onPress={props.onChangeColor}>{props.color}</Text></View>
-                <Button title="-" onPress={props.onSubScore}/>
+                <Button title=" X " onPress={props.onDeletePlayer}/>
+                <TouchableOpacity style={styles.tableCell} onPress={props.onNameChange}><Text>{props.name}</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.tableCell} onPress={props.onChangeColor}><Text>{props.color}</Text></TouchableOpacity>
+                <Button title="    -    " onPress={props.onSubScore}/>
                 <View style={styles.tableCell}><Text>{props.score}</Text></View>
-                <Button title="+" onPress={props.onAddScore} />
+                <Button title="    +    " onPress={props.onAddScore} />
             </View>
         </View>
     );

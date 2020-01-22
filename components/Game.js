@@ -3,8 +3,15 @@ import {
     Button,
     View,
     Text,
+    ScrollView,
     StyleSheet
 } from 'react-native';
+
+import {
+    Colors,
+  } from 'react-native/Libraries/NewAppScreen';
+
+import DialogInput from 'react-native-dialog-input';
 
 import {Player} from './Player'
 
@@ -12,7 +19,9 @@ export default class Game extends React.Component{
 
     state = {
         activePlayers: [],
-        history: []
+        history: [],
+        nameChangeDialogVisible: false,
+        playerNameChange: -1
     }
 
     addNewPlayer(){
@@ -20,7 +29,7 @@ export default class Game extends React.Component{
         const history = this.state.history;
         console.log("adding new player...");
         let player = {};
-        player.name = "New Name";
+        player.name = "New Player";
         player.color = "blue";
         player.score = 0;
 
@@ -79,7 +88,11 @@ export default class Game extends React.Component{
         const activePlayers = this.state.activePlayers;
         const history = this.state.history;
 
-        activePlayers[i].color = "red";
+        if(activePlayers[i].color === "blue")
+            activePlayers[i].color = "red";
+        else
+            activePlayers[i].color = "blue";
+
         history.push(activePlayers);
 
         this.setState({
@@ -88,29 +101,78 @@ export default class Game extends React.Component{
         });
     }
 
+    showNameChangeDialog(isShow, i){
+        this.setState({ 
+            nameChangeDialogVisible: isShow,
+            playerNameChange: i
+        });
+    }
+
+    onNameChange(newName){
+        const activePlayers = this.state.activePlayers;
+        const history = this.state.history;
+        const playerNameChange = this.state.playerNameChange
+        console.log("old name: " + activePlayers[playerNameChange].name);
+        console.log("new name: " + newName);
+        activePlayers[playerNameChange].name = newName;
+
+        history.push(activePlayers);
+        this.setState({ 
+            activePlayers: activePlayers,
+            history: history,
+            nameChangeDialogVisible: false,
+            playerNameChange: -1
+        });
+    }
+
     render(){
         const activePlayers = this.state.activePlayers;
+        const nameChangeDialogVisible = this.state.nameChangeDialogVisible;
+        const playerNameChange = this.state.playerNameChange;
         console.log(activePlayers);
         return (
             <View>
-                <View>
-                    {activePlayers.map((entry, i) => {
-                        return (
-                            <Player 
-                                key={i} 
-                                name={entry.name} 
-                                color={entry.color} 
-                                score={entry.score}
-                                onAddScore={() => this.onAddScore(i)}
-                                onSubScore={() => this.onSubScore(i)}
-                                onDeletePlayer={() => this.onDeletePlayer(i)}
-                                onChangeColor={() => this.onChangeColor(i)}
-                            />
-                        );
-                    })}
+                    <View>
+                        <DialogInput isDialogVisible={nameChangeDialogVisible}
+                            title={"Change Player Name"}
+                            hintInput ={playerNameChange !== -1 ? activePlayers[playerNameChange].name : ""}
+                            submitInput={ (newName) => {this.onNameChange(newName)} }
+                            closeDialog={ () => {this.showNameChangeDialog(false, -1)}}>
+                        </DialogInput>
+                        {activePlayers.map((entry, i) => {
+                            return (
+                                <Player 
+                                    key={i} 
+                                    name={entry.name} 
+                                    color={entry.color} 
+                                    score={entry.score}
+                                    onAddScore={() => this.onAddScore(i)}
+                                    onSubScore={() => this.onSubScore(i)}
+                                    onDeletePlayer={() => this.onDeletePlayer(i)}
+                                    onChangeColor={() => this.onChangeColor(i)}
+                                    onNameChange={() => this.showNameChangeDialog(true, i)}
+                                />
+                            );
+                        })}
+                    </View>
+                <View style={styles.bottom}>
+                    <Button title="Add New Player" onPress={() => this.addNewPlayer()}/>
                 </View>
-                <Button title="Add New Player" onPress={() => this.addNewPlayer()}/>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container:{
+        alignItems: 'center'
+    },
+    scrollView: {
+        backgroundColor: Colors.lighter,
+    },
+    bottom:{
+
+        justifyContent: 'flex-end',
+        marginBottom: 36
+    }
+});
