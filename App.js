@@ -19,17 +19,13 @@ const App: () => React$Node = () => {
   return (
     <>
       <StatusBar hidden={true}/>
-      <SafeAreaView>
+      <SafeAreaView style={{flex:1}}>
           <View>
             <Text style={styles.sectionTitle}>Welcome to ScoreSheet!</Text>
           </View>
-          <ScrollView
-              contentInsetAdjustmentBehavior="automatic"
-              style={styles.scrollView}>
           <View style={styles.body}>
             <Game />
           </View>
-          </ScrollView>
       </SafeAreaView>
     </>
   );
@@ -44,6 +40,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
   body: {
+    flex:1,
     backgroundColor: Colors.white,
   },
   sectionContainer: {

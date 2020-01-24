@@ -27,7 +27,7 @@ export default class Game extends React.Component{
     addNewPlayer(){
         const activePlayers = this.state.activePlayers;
         const history = this.state.history;
-        console.log("adding new player...");
+        //console.log("adding new player...");
         let player = {};
         player.name = "New Player";
         player.color = "blue";
@@ -129,36 +129,43 @@ export default class Game extends React.Component{
         const activePlayers = this.state.activePlayers;
         const nameChangeDialogVisible = this.state.nameChangeDialogVisible;
         const playerNameChange = this.state.playerNameChange;
-        console.log(activePlayers);
+        //console.log(activePlayers);
         return (
-            <View>
-                    <View>
-                        <DialogInput isDialogVisible={nameChangeDialogVisible}
-                            title={"Change Player Name"}
-                            hintInput ={playerNameChange !== -1 ? activePlayers[playerNameChange].name : ""}
-                            submitInput={ (newName) => {this.onNameChange(newName)} }
-                            closeDialog={ () => {this.showNameChangeDialog(false, -1)}}>
-                        </DialogInput>
-                        {activePlayers.map((entry, i) => {
-                            return (
-                                <Player 
-                                    key={i} 
-                                    name={entry.name} 
-                                    color={entry.color} 
-                                    score={entry.score}
-                                    onAddScore={() => this.onAddScore(i)}
-                                    onSubScore={() => this.onSubScore(i)}
-                                    onDeletePlayer={() => this.onDeletePlayer(i)}
-                                    onChangeColor={() => this.onChangeColor(i)}
-                                    onNameChange={() => this.showNameChangeDialog(true, i)}
-                                />
-                            );
-                        })}
-                    </View>
-                <View style={styles.bottom}>
-                    <Button title="Add New Player" onPress={() => this.addNewPlayer()}/>
+            <>
+            <View style={{flex:20}}>
+                <ScrollView
+                    contentInsetAdjustmentBehavior="automatic"
+                    style={styles.scrollView}
+                    >
+                    <DialogInput isDialogVisible={nameChangeDialogVisible}
+                        title={"Change Player Name"}
+                        hintInput ={playerNameChange !== -1 ? activePlayers[playerNameChange].name : ""}
+                        submitInput={ (newName) => {this.onNameChange(newName)} }
+                        closeDialog={ () => {this.showNameChangeDialog(false, -1)}}>
+                    </DialogInput>
+                    {activePlayers.map((entry, i) => {
+                        return (
+                            <Player 
+                                key={i} 
+                                name={entry.name} 
+                                color={entry.color} 
+                                score={entry.score}
+                                onAddScore={() => this.onAddScore(i)}
+                                onSubScore={() => this.onSubScore(i)}
+                                onDeletePlayer={() => this.onDeletePlayer(i)}
+                                onChangeColor={() => this.onChangeColor(i)}
+                                onNameChange={() => this.showNameChangeDialog(true, i)}
+                            />
+                        );
+                    })}
+                </ScrollView>
                 </View>
-            </View>
+                <View style={styles.bottom}>
+                    <Button title="Add New Player" 
+                        onPress={() => this.addNewPlayer()}
+                        />
+                </View>
+            </>
         );
     }
 }
@@ -166,13 +173,13 @@ export default class Game extends React.Component{
 const styles = StyleSheet.create({
     container:{
         alignItems: 'center'
-    },
+    },    
     scrollView: {
         backgroundColor: Colors.lighter,
     },
     bottom:{
-
+        flex:1,
         justifyContent: 'flex-end',
-        marginBottom: 36
+        paddingTop: 10
     }
 });

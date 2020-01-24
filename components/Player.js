@@ -24,7 +24,7 @@ export function Player(props){
 }
 
 const styles = StyleSheet.create({
-    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center',paddingTop: 30, borderWidth: 0.5, borderColor: "#c8e1ff", minWidth: 280 },
+    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center',paddingTop: 10, borderWidth: 0.5, borderColor: "#c8e1ff", minWidth: 280 },
     tableRow:{ flex: 1, alignItems:'center', flexDirection: 'row', alignSelf: 'stretch', borderWidth: 0.5, borderColor: "#c8e1ff" },
     tableCell: { flex: 1, alignItems:'center', alignSelf: 'stretch', borderWidth: 0, borderColor: "#c8e1ff"}
   });
