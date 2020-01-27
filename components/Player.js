@@ -7,19 +7,21 @@ import {
     StyleSheet
 } from 'react-native';
 
-export function Player(props){
-    return(
-        <View style={styles.tableContainer}>
-            <View style={styles.tableRow}>
-                <Button title=" X " onPress={props.onDeletePlayer}/>
-                <TouchableOpacity style={styles.tableCell} onPress={props.onNameChange}><Text>{props.name}</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.tableCell} onPress={props.onChangeColor}><Text>{props.color}</Text></TouchableOpacity>
-                <Button title="    -    " onPress={props.onSubScore}/>
-                <View style={styles.tableCell}><Text>{props.score}</Text></View>
-                <Button title="    +    " onPress={props.onAddScore} />
+export default class Player extends React.Component{
+    render(){
+        return(
+            <View style={styles.tableContainer}>
+                <View style={styles.tableRow}>
+                    <Button title=" X " onPress={this.props.onDeletePlayer}/>
+                    <TouchableOpacity style={styles.tableCell} onPress={this.props.onNameChange}><Text>{this.props.name}</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.tableCell} onPress={this.props.onChangeColor}><Text>{this.props.color}</Text></TouchableOpacity>
+                    <Button title="    -    " onPress={this.props.onSubScore}/>
+                    <View style={styles.tableCell}><Text>{this.props.score}</Text></View>
+                    <Button title="    +    " onPress={this.props.onAddScore} />
+                </View>
             </View>
-        </View>
-    );
+        );
+    }
     
 }
 

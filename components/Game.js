@@ -13,7 +13,7 @@ import {
 
 import DialogInput from 'react-native-dialog-input';
 
-import {Player} from './Player'
+import Player from './Player'
 
 export default class Game extends React.Component{
 
@@ -26,6 +26,8 @@ export default class Game extends React.Component{
 
     addNewPlayer(){
         const activePlayers = this.state.activePlayers;
+        if(activePlayers.length === 10)
+            return;
         const history = this.state.history;
         //console.log("adding new player...");
         let player = {};
