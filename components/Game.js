@@ -26,8 +26,8 @@ export default class Game extends React.Component{
 
     addNewPlayer(){
         const activePlayers = this.state.activePlayers;
-        if(activePlayers.length === 10)
-            return;
+        // if(activePlayers.length === 10)
+        //     return;
         const history = this.state.history;
         //console.log("adding new player...");
         let player = {};

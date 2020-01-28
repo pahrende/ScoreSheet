@@ -8,6 +8,13 @@ import {
 } from 'react-native';
 
 export default class Player extends React.Component{
+
+    shouldComponentUpdate(props){
+        if(props.name !== this.props.name || props.color !== this.props.color || props.score !== this.props.score)
+            return true;
+        return false;
+    }
+
     render(){
         return(
             <View style={styles.tableContainer}>
