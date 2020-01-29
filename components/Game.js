@@ -7,10 +7,6 @@ import {
     StyleSheet
 } from 'react-native';
 
-import {
-    Colors,
-  } from 'react-native/Libraries/NewAppScreen';
-
 import DialogInput from 'react-native-dialog-input';
 
 import Player from './Player'
@@ -26,8 +22,8 @@ export default class Game extends React.Component{
 
     addNewPlayer(){
         const activePlayers = this.state.activePlayers;
-        // if(activePlayers.length === 10)
-        //     return;
+        if(activePlayers.length === 15)
+            return;
         const history = this.state.history;
         //console.log("adding new player...");
         let player = {};
@@ -177,7 +173,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },    
     scrollView: {
-        backgroundColor: Colors.lighter,
     },
     bottom:{
         flex:1,
